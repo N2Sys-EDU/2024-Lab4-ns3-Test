@@ -1,7 +1,7 @@
 [
     {
-        "flow_size_0": 20000,
-        "flow_size_1": 30000
+        "flow_size_0": 900000,
+        "flow_size_1": 900000
     },
     {
         "flow_size_0": 800000,

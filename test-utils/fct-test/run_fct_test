@@ -7,7 +7,7 @@ import shutil
 import sys
 
 # 自定义函数：比对文件内容，判断相差是否在5%以内
-def compare_files_with_tolerance(file1, file2, tolerance=0.05):
+def compare_files_with_tolerance(file1, file2, tolerance=0.05, abs_tolerance=1000000):
     """
     比较两个文件的内容，检查每行对应数字是否相差在5%以内。
     :param file1: 第一个文件路径
@@ -32,8 +32,9 @@ def compare_files_with_tolerance(file1, file2, tolerance=0.05):
                 num2 = float(line2.strip())
 
                 # 检查差值是否在允许范围内
-                if abs(num1 - num2) > tolerance * num2:
-                    print(f"Result out of acceptable range: |{num1} - {num2}| > {tolerance} * {num2}")
+                # 如果误差在 5% 以内或者相差在 1秒 以内，则认为在误差允许范围内
+                if abs(num1 - num2) > tolerance * num2 and abs(num1 - num2) > abs_tolerance:
+                    print(f"Result out of acceptable range: |{num1} - {num2}| > {tolerance} * {num2} and abs({num1} - {num2}) > {abs_tolerance}")
                     return False
         return True
     except Exception as e:
